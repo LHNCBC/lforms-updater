@@ -1,4 +1,7 @@
-// The update function for updating resources to the version in this filename.
+/**
+ *  The update function for updating forms or resources to the version in this filename.
+ * @return the updated form or resource.
+ */
 module.exports = function (parsedJSON) {
   // In this version, the observationLinkPeriod extension changed.  This
   // affects both LForms definitions and Questionnaires.
@@ -10,6 +13,7 @@ module.exports = function (parsedJSON) {
         if (ext.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-observationLinkPeriod")
           ext.url = "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod";
       }
-    }
+    });
   }
+  return parsedJSON;
 };
