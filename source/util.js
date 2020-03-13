@@ -1,5 +1,7 @@
 // Utility functions used by other modules in this package.
 
+'use strict';
+
 module.exports = {
   /**
    *  Returns true if the given parsed JSON is a FHIR resource.
