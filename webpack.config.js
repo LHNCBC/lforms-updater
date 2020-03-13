@@ -5,7 +5,7 @@ module.exports = {
   },
   entry: {
     main: [
-//      '@babel/polyfill',
+//      '@babel/polyfill', // might be needed in the future
       './source/index.js'
     ]
   },
