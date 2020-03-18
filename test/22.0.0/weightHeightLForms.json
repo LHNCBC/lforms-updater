@@ -1,0 +1,288 @@
+{
+  "PATH_DELIMITER": "/",
+  "code": "55418-8",
+  "codeList": [
+    {
+      "system": "http://loinc.org",
+      "code": "55418-8",
+      "display": "Weight & Height tracking panel"
+    }
+  ],
+  "identifier": [
+    {
+      "system": "http://loinc.org",
+      "value": "55418-8"
+    }
+  ],
+  "codeSystem": "LOINC",
+  "name": "Weight & Height tracking panel",
+  "type": null,
+  "template": "table",
+  "items": [
+    {
+      "dataType": "REAL",
+      "question": "Weight",
+      "codeList": [
+        {
+          "system": "http://loinc.org",
+          "code": "29463-7",
+          "display": "Weight"
+        }
+      ],
+      "questionCode": "29463-7",
+      "questionCodeSystem": "LOINC",
+      "linkId": "/29463-7",
+      "answerCardinality": {
+        "min": "0",
+        "max": "1"
+      },
+      "units": [
+        {
+          "code": "kg",
+          "system": "http://unitsofmeasure.org",
+          "default": true
+        }
+      ],
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-unit",
+          "valueCoding": {
+            "code": "kg",
+            "system": "http://unitsofmeasure.org"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-observationLinkPeriod",
+          "valueDuration": {
+            "value": 1,
+            "unit": "year",
+            "system": "http://unitsofmeasure.org",
+            "code": "a"
+          }
+        }
+      ],
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "unit": {
+        "code": "kg",
+        "system": "http://unitsofmeasure.org",
+        "default": true
+      }
+    },
+    {
+      "dataType": "CNE",
+      "question": "Clothing worn during measure",
+      "codeList": [
+        {
+          "system": "http://loinc.org",
+          "code": "8352-7",
+          "display": "Clothing worn during measure"
+        }
+      ],
+      "questionCode": "8352-7",
+      "questionCodeSystem": "LOINC",
+      "linkId": "/8352-7",
+      "answerCardinality": {
+        "min": "0",
+        "max": "1"
+      },
+      "displayControl": {
+        "answerLayout": {
+          "type": "COMBO_BOX"
+        }
+      },
+      "answers": [
+        {
+          "code": "LA11871-3",
+          "text": "Underwear or less",
+          "codeSystem": "http://loinc.org"
+        },
+        {
+          "code": "LA11872-1",
+          "text": "Street clothes, no shoes",
+          "codeSystem": "http://loinc.org"
+        },
+        {
+          "code": "LA11873-9",
+          "text": "Street clothes & shoes",
+          "codeSystem": "http://loinc.org"
+        }
+      ],
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      }
+    },
+    {
+      "dataType": "REAL",
+      "question": "Body height",
+      "codeList": [
+        {
+          "system": "http://loinc.org",
+          "code": "8302-2",
+          "display": "Body height"
+        }
+      ],
+      "questionCode": "8302-2",
+      "questionCodeSystem": "LOINC",
+      "linkId": "/8302-2",
+      "answerCardinality": {
+        "min": "0",
+        "max": "1"
+      },
+      "units": [
+        {
+          "code": "[in_i]",
+          "system": "http://unitsofmeasure.org",
+          "default": true
+        }
+      ],
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-unit",
+          "valueCoding": {
+            "code": "[in_i]",
+            "system": "http://unitsofmeasure.org"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-observationLinkPeriod",
+          "valueDuration": {
+            "value": 1,
+            "unit": "year",
+            "system": "http://unitsofmeasure.org",
+            "code": "a"
+          }
+        }
+      ],
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "unit": {
+        "code": "[in_i]",
+        "system": "http://unitsofmeasure.org",
+        "default": true
+      }
+    },
+    {
+      "dataType": "REAL",
+      "question": "BMI",
+      "codeList": [
+        {
+          "system": "http://loinc.org",
+          "code": "39156-5",
+          "display": "BMI"
+        }
+      ],
+      "questionCode": "39156-5",
+      "questionCodeSystem": "LOINC",
+      "linkId": "/39156-5",
+      "answerCardinality": {
+        "min": "0",
+        "max": "1"
+      },
+      "units": [
+        {
+          "code": "kg/m2",
+          "system": "http://unitsofmeasure.org",
+          "default": true
+        }
+      ],
+      "extension": [],
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "unit": {
+        "code": "kg/m2",
+        "system": "http://unitsofmeasure.org",
+        "default": true
+      }
+    },
+    {
+      "dataType": "CNE",
+      "question": "Bdy position with respect to gravity",
+      "codeList": [
+        {
+          "system": "http://loinc.org",
+          "code": "8361-8",
+          "display": "Bdy position with respect to gravity"
+        }
+      ],
+      "questionCode": "8361-8",
+      "questionCodeSystem": "LOINC",
+      "linkId": "/8361-8",
+      "answerCardinality": {
+        "min": "0",
+        "max": "1"
+      },
+      "displayControl": {
+        "answerLayout": {
+          "type": "COMBO_BOX"
+        }
+      },
+      "answers": [
+        {
+          "code": "LA11868-9",
+          "text": "Sitting",
+          "codeSystem": "http://loinc.org"
+        },
+        {
+          "code": "LA11869-7",
+          "text": "Lying",
+          "codeSystem": "http://loinc.org"
+        },
+        {
+          "code": "LA11870-5",
+          "text": "Standing",
+          "codeSystem": "http://loinc.org"
+        }
+      ],
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      }
+    }
+  ],
+  "templateOptions": {
+    "showQuestionCode": false,
+    "showCodingInstruction": false,
+    "tabOnInputFieldsOnly": false,
+    "hideFormControls": false,
+    "showFormOptionPanel": false,
+    "showFormOptionPanelButton": false,
+    "showItemOptionPanelButton": false,
+    "hideUnits": false,
+    "allowMultipleEmptyRepeatingItems": false,
+    "allowHTMLInInstructions": false,
+    "useAnimation": true,
+    "displayControl": {
+      "questionLayout": "vertical"
+    },
+    "viewMode": "auto",
+    "showFormHeader": false,
+    "showColumnHeaders": true,
+    "defaultAnswerLayout": {
+      "answerLayout": {
+        "type": "COMBO_BOX",
+        "columns": "0"
+      }
+    },
+    "useTreeLineStyle": true,
+    "columnHeaders": [
+      {
+        "name": "Name"
+      },
+      {
+        "name": "Value"
+      },
+      {
+        "name": "Units"
+      }
+    ]
+  },
+  "hasSavedData": true
+}
