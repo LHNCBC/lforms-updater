@@ -1,0 +1,28 @@
+{
+  "resourceType": "Observation",
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "29463-7",
+        "display": "Weight"
+      }
+    ],
+    "text": "Weight"
+  },
+  "meta": {
+    "tag": [
+      {
+        "display": "lformsVersion: 22.0.0"
+      }
+    ]
+  },
+  "valueQuantity": {
+    "value": "42",
+    "code": "kg",
+    "system": "http://unitsofmeasure.org"
+  },
+  "effectiveDateTime": "2020-03-19T15:12:25.585Z",
+  "issued": "2020-03-19T15:12:25.585Z"
+}
