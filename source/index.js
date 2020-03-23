@@ -7,7 +7,7 @@
  *  A list of all version numbers for which an update step is provided, in order
  *  from highest to lowest version number.
  */
-const updateVersions_ = ['22.0.0'];
+const updateVersions_ = ['23.0.0', '22.0.0'];
 
 /**
  *  A hash from an updateVersions_ entry to a function for performing that
@@ -23,9 +23,12 @@ for (let v of updateVersions_)
  *  to be compatible with the latest LForms version.
  * @param parsedJSON the parsed JSON containing the form
  *  definition or FHIR resource to be updated.
+ * @param version (optional) the version to update to.  Updates for version
+ *  numbers greater than this number will not be run.
  * @return the updated form definition or FHIR resource.
  */
-module.exports = {update: function (parsedJSON) {
+module.exports = {update: function (parsedJSON, version) {
+  let stopVersion = version;
   let util = require('./util');
   // Determine the lforms version
   var isFHIR = util.isFHIRResource(parsedJSON);
@@ -36,7 +39,7 @@ module.exports = {update: function (parsedJSON) {
       let tags = meta.tag;
       if (tags) {
         for (let t of tags) {
-          let tagVersion = util.versionFromTag(t.display);
+          let tagVersion = util.versionFromTag(t);
           if (tagVersion) {
             lformsVersion = tagVersion;
             break;
@@ -53,7 +56,8 @@ module.exports = {update: function (parsedJSON) {
   let updateSteps = [];
   for (let i=0, len=updateVersions_.length, uv; i<len && (uv=updateVersions_[i]) &&
        util.versionLessThan(lformsVersion, uv); ++i) {
-    updateSteps.push(uv);
+    if (!stopVersion || !util.versionLessThan(stopVersion, uv))
+      updateSteps.push(uv);
   }
 
   for (let step of updateSteps.reverse())
@@ -71,20 +75,22 @@ module.exports = {update: function (parsedJSON) {
         tags = meta.tag = [];
       let versionTag;
       for (let t of tags) {
-        let version = util.versionFromTag(t.display);
+        let version = util.versionFromTag(t);
         if (version) {
           versionTag = t;
           break;
         }
       }
-      let versionDisplay = util.makeVersionTag(updateVersions_[0]);
-      if (versionTag)
-        versionTag.display = versionDisplay;
+      let versionDisplay = util.makeVersionTag(updateSteps[0]);
+      if (versionTag) {
+        versionTag.code = versionDisplay;
+        delete versionTag.display; // in case it was from the old version tag format
+      }
       else
-        tags.push({display: versionDisplay});
+        tags.push({code: versionDisplay});
     }
     else
-      parsedJSON.lformsVersion = updateVersions_[0];
+      parsedJSON.lformsVersion = updateSteps[0];
   }
 
   return parsedJSON;

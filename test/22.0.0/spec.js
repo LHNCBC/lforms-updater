@@ -8,7 +8,6 @@ const OLD_LINK_URI = "http://hl7.org/fhir/StructureDefinition/questionnaire-obse
 const NEW_LINK_URI = "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod";
 
 const UPDATE_VERSION = '22.0.0';
-let updateVersionTag_ = util.makeVersionTag(UPDATE_VERSION);
 
 describe(UPDATE_VERSION, function() {
   describe('Questionnaire', function() {
@@ -22,7 +21,7 @@ describe(UPDATE_VERSION, function() {
       let revised, weightExt;
       before(() => {
         qDef = JSON.parse(qDefData);
-        revised = updater.update(qDef);
+        revised = updater.update(qDef, UPDATE_VERSION);
         weightExt = revised.item[0].extension;
       });
       it('should still have questionnaire-unit', () => {
@@ -35,7 +34,7 @@ describe(UPDATE_VERSION, function() {
         assert.equal(heightExt[1].url, NEW_LINK_URI);
       });
       it('should have the LForms version updated', ()=>{
-        assert.equal(revised.meta.tag[0].display, updateVersionTag_);
+        assert.equal(util.versionFromTag(revised.meta.tag[0]), UPDATE_VERSION);
       });
     });
 
@@ -54,8 +53,9 @@ describe(UPDATE_VERSION, function() {
         let heightExt = revised.item[2].extension;
         assert.equal(heightExt[1].url, NEW_LINK_URI);
       });
+
       it('should have the LForms version updated', ()=>{
-        assert.equal(revised.meta.tag[0].display, updateVersionTag_);
+        assert.equal(util.versionFromTag(revised.meta.tag[0]), UPDATE_VERSION);
       });
     });
 
@@ -64,11 +64,12 @@ describe(UPDATE_VERSION, function() {
       // This tests that we don't run an update for a version that should
       // already have the update (if the version number is later than the
       // version number that requires it).
-      let revised, weightExt, versionTag='lformsVersion: 22.2.1';
+      let futureVersion = '22.2.1';
+      let revised, weightExt, versionTag='lformsVersion: '+futureVersion;
       before(() => {
         qDef = JSON.parse(qDefData);
         qDef.meta.tag = [{display: versionTag}];
-        revised = updater.update(qDef);
+        revised = updater.update(qDef, UPDATE_VERSION);
         weightExt = revised.item[0].extension;
       });
 
@@ -80,7 +81,7 @@ describe(UPDATE_VERSION, function() {
         assert.equal(heightExt[1].url, OLD_LINK_URI);
       });
       it('should not have the LForms version updated', ()=>{
-        assert.equal(revised.meta.tag[0].display, versionTag);
+        assert.equal(util.versionFromTag(revised.meta.tag[0]), futureVersion);
       });
     });
   });
@@ -122,7 +123,7 @@ describe(UPDATE_VERSION, function() {
       before(() => {
         lfDef = JSON.parse(lfDefData);
         lfDef.lformsVersion = '21.2.1';
-        revised = updater.update(lfDef);
+        revised = updater.update(lfDef, UPDATE_VERSION);
         weightExt = revised.items[0].extension;
       });
 
@@ -145,7 +146,7 @@ describe(UPDATE_VERSION, function() {
       before(() => {
         lfDef = JSON.parse(lfDefData);
         lfDef.lformsVersion = '22.2.1';
-        revised = updater.update(lfDef);
+        revised = updater.update(lfDef, UPDATE_VERSION);
         weightExt = revised.items[0].extension;
       });
 

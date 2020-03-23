@@ -62,13 +62,17 @@ module.exports = {
 
 
   /**
-   *  Returns the LForms SemVer version from the given FHIR tag display string,
+   *  Returns the LForms SemVer version from the given FHIR tag object,
    *  or null if the given tag string does not indicate an LForms version.
-   * @param tagDisplay the display string of a FHIR tag
+   * @param tag A FHIR tag object
    */
-  versionFromTag: function(tagDisplay) {
+  versionFromTag: function(tag) {
     let rtn = null;
-    let md = tagDisplay.match(/^lformsVersion: (.+)$/);
+    // Currently the version is on the "code" attribute, but originally it was
+    // on the "display" attribute, so we check both.
+    let versionRegex = /^lformsVersion: (.+)$/;
+    let versionStr = tag.code || tag.display;
+    let md = versionStr.match(versionRegex);
     if (md)
       rtn = md[1];
     return rtn;
