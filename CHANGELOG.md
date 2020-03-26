@@ -2,6 +2,12 @@
 
 This project follows [Semantic Versioning](http://semver.org/).
 
+
+## [23.0.1] 2020-03-26
+### Added
+- Removed the extension for answer repeats and replaced it with 'repeats' on items.
+  This is another part of the changes for lforms 23.0.0.
+
 ## [23.0.0] 2020-03-20
 ### Added
 - Now handles the breaking changes in lforms version 23.

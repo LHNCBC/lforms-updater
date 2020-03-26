@@ -60,7 +60,8 @@ module.exports = {update: function (parsedJSON, version) {
       updateSteps.push(uv);
   }
 
-  for (let step of updateSteps.reverse())
+  let latestVersion = updateSteps[0];
+  for (let step of updateSteps.reverse()) // reverse changes the array in place
     parsedJSON = updateFns_[step](parsedJSON);
 
   // If we ran any of the updates, update the version tag
@@ -74,6 +75,7 @@ module.exports = {update: function (parsedJSON, version) {
       if (!tags)
         tags = meta.tag = [];
       let versionTag;
+      // for existing tags
       for (let t of tags) {
         let version = util.versionFromTag(t);
         if (version) {
@@ -81,7 +83,7 @@ module.exports = {update: function (parsedJSON, version) {
           break;
         }
       }
-      let versionDisplay = util.makeVersionTag(updateSteps[0]);
+      let versionDisplay = util.makeVersionTag(latestVersion);
       if (versionTag) {
         versionTag.code = versionDisplay;
         delete versionTag.display; // in case it was from the old version tag format
@@ -90,7 +92,7 @@ module.exports = {update: function (parsedJSON, version) {
         tags.push({code: versionDisplay});
     }
     else
-      parsedJSON.lformsVersion = updateSteps[0];
+      parsedJSON.lformsVersion = latestVersion;
   }
 
   return parsedJSON;
