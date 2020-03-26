@@ -44,7 +44,7 @@ describe(UPDATE_VERSION, function() {
       before(() => {
         qDef = JSON.parse(qDefData);
         qDef.meta.tag = [{display: 'lformsVersion: 21.2.1'}];
-        revised = updater.update(qDef);
+        revised = updater.update(qDef, UPDATE_VERSION);
         weightExt = revised.item[0].extension;
       });
 
@@ -98,7 +98,7 @@ describe(UPDATE_VERSION, function() {
       let revised, weightExt;
       before(() => {
         lfDef = JSON.parse(lfDefData);
-        revised = updater.update(lfDef);
+        revised = updater.update(lfDef, UPDATE_VERSION);
         weightExt = revised.items[0].extension;
       });
 

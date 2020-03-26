@@ -10,6 +10,7 @@ module.exports = {
     return !!parsedJSON.resourceType;
   },
 
+
   /**
    *  Finds extension arrays in the given structure, and calls the callback
    *  for each array found, passing it as a parameter.
@@ -21,6 +22,21 @@ module.exports = {
     if (items) {
       for (let i of items)
         this.findExtensions(i, callback);
+    }
+  },
+
+
+  /**
+   *  Finds the item by searching extension arrays in the given structure, and calls the callback
+   *  for each array found, passing the item as a parameter.
+   */
+  findItemByExtension: function (parsedJSON, callback) {
+    if (parsedJSON.extension)
+      callback(parsedJSON);
+    let items = parsedJSON.item || parsedJSON.items; // "items" is the LForms format
+    if (items) {
+      for (let i of items)
+        this.findItemByExtension(i, callback);
     }
   },
 

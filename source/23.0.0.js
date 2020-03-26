@@ -30,5 +30,21 @@ module.exports = function (parsedJSON) {
     }
   }
 
+  // In this version the extension in Questionnaire for answer repeats is removed, and replaced with repeats = true.
+  if (parsedJSON.resourceType === 'Questionnaire') {
+    util.findItemByExtension(parsedJSON, function (item) {
+      if (item.extension) {
+        for (let i=0; i< item.extension.length; i++) {
+          let ext = item.extension[i];
+          if (ext.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-answerRepeats") {
+            item.repeats = true;
+            item.extension.splice(i, 1);
+            i = i - 1;
+          }
+        }
+      }
+    });
+  }
+
   return parsedJSON;
 };
