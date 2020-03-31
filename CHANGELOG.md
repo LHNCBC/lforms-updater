@@ -3,6 +3,12 @@
 This project follows [Semantic Versioning](http://semver.org/).
 
 
+## [23.0.2] 2020-03-31
+### Fixed
+- The browser-ready file now assigns the lformsUpdater to the "window" object.
+  Previously it was just an implicit global, which caused an error if bundled
+  into a strict-mode file.
+
 ## [23.0.1] 2020-03-26
 ### Added
 - Removed the extension for answer repeats and replaced it with 'repeats' on items.
