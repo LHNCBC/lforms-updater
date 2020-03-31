@@ -14,7 +14,7 @@ module.exports = {
   output: {
     path: __dirname,
     filename: 'browser/updater.js',
-    libraryTarget: 'assign',
+    libraryTarget: 'window',
     library: "lformsUpdater"
   },
   module: {
