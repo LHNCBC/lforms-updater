@@ -2,7 +2,11 @@
 
 This project follows [Semantic Versioning](http://semver.org/).
 
-
+## [24.0.0] 2020-04-09
+### Added
+- Add linkId for each item in LForms, and convert questionCode to linkId in
+  skipLogic, dataControl and calculationMethod.
+  
 ## [23.0.2] 2020-03-31
 ### Fixed
 - The browser-ready file now assigns the lformsUpdater to the "window" object.
