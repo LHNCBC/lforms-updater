@@ -42,7 +42,6 @@ describe(UPDATE_VERSION, function() {
       assert.equal(updatedAllInOneDef.items[41].items[1].skipLogic.conditions[0].source, "/repeatingSection1/rpSource1");
     });
 
-
     it('should convert data control to use linkId', () => {
       assert.equal(allInOneDef.items[42].items[1].dataControl[0].source.sourceItemCode, "itemWithExtraData");
 
@@ -50,6 +49,18 @@ describe(UPDATE_VERSION, function() {
 
       assert.equal(updatedAllInOneDef.items[42].items[1].dataControl[0].source.sourceLinkId, "/dataControlExamples/itemWithExtraData");
 
+    });
+
+    it('should convert calculation method (BMI) to use linkId', () => {
+      assert.equal(allInOneDef.items[57].calculationMethod.name, "BMI");
+      assert.equal(allInOneDef.items[57].calculationMethod.value[0], "3141-9");
+      assert.equal(allInOneDef.items[57].calculationMethod.value[1], "8302-2");
+
+      updatedAllInOneDef = updater.update(allInOneDef, UPDATE_VERSION);
+
+      assert.equal(allInOneDef.items[57].calculationMethod.name, "BMI");
+      assert.equal(allInOneDef.items[57].calculationMethod.value[0], "/3141-9");
+      assert.equal(allInOneDef.items[57].calculationMethod.value[1], "/8302-2");
     });
 
   });
