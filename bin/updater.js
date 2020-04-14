@@ -41,9 +41,14 @@ else if (args['d']) {
   catch (err) {
     return console.log('Unable to read directory: ' + err);
   }
-  const filesNames = dirents
-      .filter(dirent => dirent.isFile() && dirent.name.match(/\.json$/i))
-      .map(dirent => dirent.name);
+
+  const filesNames = dirents.reduce(function(filtered, dirent) {
+    if (dirent.isFile() && dirent.name.match(/\.json$/i)) {
+      filtered.push(dirent.name);
+    }
+    return filtered;
+  }, []);
+
   if (filesNames.length === 0) {
     return console.log('No .json files in directory: ' + inputDir);
   }
