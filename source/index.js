@@ -7,7 +7,7 @@
  *  A list of all version numbers for which an update step is provided, in order
  *  from highest to lowest version number.
  */
-const updateVersions_ = ['23.0.0', '22.0.0'];
+const updateVersions_ = ['24.0.0', '23.0.0', '22.0.0'];
 
 /**
  *  A hash from an updateVersions_ entry to a function for performing that
@@ -56,7 +56,7 @@ module.exports = {update: function (parsedJSON, version) {
   let updateSteps = [];
   for (let i=0, len=updateVersions_.length, uv; i<len && (uv=updateVersions_[i]) &&
        util.versionLessThan(lformsVersion, uv); ++i) {
-    if (!stopVersion || !util.versionLessThan(stopVersion, uv))
+    if (!stopVersion || !util.versionLessThan(stopVersion, uv)) // stopVersion >= uv
       updateSteps.push(uv);
   }
 
