@@ -47,7 +47,6 @@ describe(UPDATE_VERSION, function() {
         lfDef = JSON.parse(lfDefData);
         revised = updater.update(lfDef, UPDATE_VERSION);
         bmiExt = revised.items[3].extension;
-console.log(JSON.stringify(revised));
       });
 
       it('should have updated URLs for calculatedExpression', ()=> {

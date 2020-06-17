@@ -5,7 +5,7 @@
  * @return the updated form or resource.
  */
 module.exports = function (parsedJSON) {
-  // In this version, the observationLinkPeriod extension changed.  This
+  // In this version, the calculatedExpresion URI changed.  This
   // affects both LForms definitions and Questionnaires.
 
   let util = require('./util');
