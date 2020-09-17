@@ -35,7 +35,7 @@ describe(UPDATE_VERSION, function() {
         path.join(__dirname, './weightHeightLForms.json')).toString();
     });
 
-    describe('updated unversioned Questionnaire', () => {
+    describe('updated unversioned form definition', () => {
       let revised;
       before(() => {
         lfDef = JSON.parse(lfDefData);
