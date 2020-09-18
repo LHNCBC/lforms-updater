@@ -2,6 +2,12 @@
 
 This project follows [Semantic Versioning](http://semver.org/).
 
+## [26.0.0] 2020-09-18
+### Changed
+- Handles the new defaults for templateOptions in LForms 26. Form controls
+  and the header are hidden by default in version 26. This preserves the
+  previous behavior unless templateOptions are explicitly specified.
+
 ## [25.0.1] 2020-06-18
 ### Fixed
 - Updated the lforms peer dependency to 25.0.0.
