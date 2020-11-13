@@ -2,6 +2,11 @@
 
 This project follows [Semantic Versioning](http://semver.org/).
 
+## [27.0.0] 2020-11-10
+### Changed
+- Updates FHIR Questionnaire definitions to use the observationExtract
+  extension if a observationLinkPeriod is used.
+
 ## [26.0.0] 2020-09-18
 ### Changed
 - Handles the new defaults for templateOptions in LForms 26. Form controls
