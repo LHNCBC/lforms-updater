@@ -5,8 +5,8 @@
  * @return the updated form or resource.
  */
 module.exports = function (parsedJSON) {
-  // If an observationLinkPeriod is used we add observationExtract
-  // and the form controls. This affects LForms and versioned Questionnaires
+  // If an observationLinkPeriod extension is used we add observationExtract
+  // This affects LForms and versioned Questionnaires
 
   let util = require('./util');
   if (!util.isFHIRResource(parsedJSON) ||
