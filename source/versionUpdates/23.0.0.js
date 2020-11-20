@@ -10,7 +10,7 @@ module.exports = function (parsedJSON) {
   // In this version, the lformsVersion tag changed to have its value on the
   // "code" field rather than the "display" field (because the HAPI FHIR server
   // requires a "code" for tags).
-  let util = require('./util');
+  let util = require('../util');
   let meta = parsedJSON.meta;
   if (meta) {
     let tags = meta.tag;
