@@ -8,7 +8,6 @@
  *  from highest to lowest version number.
  */
 const updateVersions_ = require('./versionList');
-['26.0.0', '25.0.0', '24.0.0', '23.0.0', '22.0.0'];
 
 /**
  *  A hash from an updateVersions_ entry to a function for performing that
