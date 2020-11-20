@@ -8,11 +8,11 @@ module.exports = function (parsedJSON) {
   // In this version new defaults were provided for templateOptions to hide the header
   // and the form controls. This only affects LForms.
 
-  let util = require('./util');
+  let util = require('../util');
   if (!util.isFHIRResource(parsedJSON)) {
     if (typeof parsedJSON.templateOptions === 'object') {
       // If template options were specified we won't override them
-      
+
       if (parsedJSON.templateOptions.hideFormControls === undefined) {
         parsedJSON.templateOptions.hideFormControls = false;
       }
@@ -29,6 +29,6 @@ module.exports = function (parsedJSON) {
       }
     }
   }
-  
+
   return parsedJSON;
 };

@@ -196,7 +196,7 @@ function _findItemsUpwardsAlongAncestorTree(item, questionCode) {
  */
 module.exports = function (parsedJSON) {
 
-  let util = require('./util');
+  let util = require('../util');
   // if it is LForms form data object
   if (!util.isFHIRResource(parsedJSON) && parsedJSON.items) {
     convertCodeToLinkId(parsedJSON);
