@@ -35,6 +35,32 @@ describe(UPDATE_VERSION, function () {
   });
 
 
+  describe('Questionnaire with no Tag', function () {
+    let qDefData, qDef;
+    before(() => {
+      qDefData = fs.readFileSync(
+        path.join(__dirname, './weightHeightQNoTag.json')).toString();
+    });
+
+    describe('updated versioned Questionnaire', () => {
+      let revised, extensions;
+      before(() => {
+        qDef = JSON.parse(qDefData);
+        revised = updater.update(qDef, UPDATE_VERSION);
+        extensions = revised.item[0].extension;
+      });
+
+      it('should have not added an extension for observationExtract', () => {
+        assert.equal(extensions.length, 2);
+      });
+
+      it('should have the LForms version updated', () => {
+        assert.equal(util.versionFromTag(revised.meta.tag[0]), UPDATE_VERSION);
+      });
+    });
+  });
+
+
   describe('LForms definition', function () {
     let lfDefData, lfDef;
     before(() => {
