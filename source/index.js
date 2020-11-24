@@ -7,7 +7,7 @@
  *  A list of all version numbers for which an update step is provided, in order
  *  from highest to lowest version number.
  */
-const updateVersions_ = ['27.0.0', '26.0.0', '25.0.0', '24.0.0', '23.0.0', '22.0.0'];
+const updateVersions_ = require('./versionList');
 
 /**
  *  A hash from an updateVersions_ entry to a function for performing that
@@ -15,7 +15,7 @@ const updateVersions_ = ['27.0.0', '26.0.0', '25.0.0', '24.0.0', '23.0.0', '22.0
  */
 const updateFns_ = {};
 for (let v of updateVersions_)
-  updateFns_[v] = require('./'+v);
+  updateFns_[v] = require('./versionUpdates/'+v);
 
 
 /**

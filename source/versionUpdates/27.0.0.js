@@ -8,7 +8,7 @@ module.exports = function (parsedJSON) {
   // If an observationLinkPeriod extension is used we add observationExtract
   // This affects LForms and versioned Questionnaires
 
-  let util = require('./util');
+  let util = require('../util');
   if (!util.isFHIRResource(parsedJSON) ||
       (parsedJSON.resourceType === 'Questionnaire' && util.hasLformsTag(parsedJSON))) {
     util.findExtensions(parsedJSON, function (extArray) {
