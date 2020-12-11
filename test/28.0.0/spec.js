@@ -39,7 +39,7 @@ describe(UPDATE_VERSION, function () {
     let qDefData, qDef;
     before(() => {
       qDefData = fs.readFileSync(
-        path.join(__dirname, './weightHeightQNoTag.json')).toString();
+        path.join(__dirname, './weightHeightQ.json')).toString();
     });
 
     describe('updated versioned Questionnaire', () => {
