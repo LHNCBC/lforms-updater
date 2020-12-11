@@ -46,6 +46,7 @@ describe(UPDATE_VERSION, function () {
       let revised, extensions;
       before(() => {
         qDef = JSON.parse(qDefData);
+        delete qDef.meta.tag;
         revised = updater.update(qDef, UPDATE_VERSION);
         extensions = revised.item[0].extension;
       });
