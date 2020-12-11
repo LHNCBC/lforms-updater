@@ -6,7 +6,7 @@ const util = require('../../source/util');
 
 const OBSERVATION_EXTRACT_URI = 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract';
 
-const UPDATE_VERSION = '27.0.0';
+const UPDATE_VERSION = '28.0.0';
 
 describe(UPDATE_VERSION, function () {
   describe('Questionnaire', function () {

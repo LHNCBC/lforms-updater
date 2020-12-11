@@ -2,7 +2,7 @@
 
 This project follows [Semantic Versioning](http://semver.org/).
 
-## [27.0.0] 2020-11-20
+## [28.0.0] 2020-12-11
 ### Changed
 - Updates FHIR Questionnaire definitions to use the observationExtract
   extension if an observationLinkPeriod is used.
