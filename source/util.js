@@ -2,6 +2,8 @@
 
 'use strict';
 
+const VERSION_REGEX = /^lformsVersion: (.+)$/;
+
 module.exports = {
   /**
    *  Returns true if the given parsed JSON is a FHIR resource.
@@ -86,11 +88,27 @@ module.exports = {
     let rtn = null;
     // Currently the version is on the "code" attribute, but originally it was
     // on the "display" attribute, so we check both.
-    let versionRegex = /^lformsVersion: (.+)$/;
     let versionStr = tag.code || tag.display;
-    let md = versionStr.match(versionRegex);
+    let md = versionStr.match(VERSION_REGEX);
     if (md)
       rtn = md[1];
     return rtn;
+  },
+
+
+  /**
+   *  Returns true if there is a LForms tag in the FHIR resource
+   * @param parsedJSON the updated resource
+   */
+  hasLformsTag(parsedJSON) {
+    if (parsedJSON.meta && parsedJSON.meta.tag) {
+      for (const tag of parsedJSON.meta.tag) {
+        if (tag.code && tag.code.match(VERSION_REGEX)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 }
