@@ -23,9 +23,11 @@ describe(UPDATE_VERSION, () => {
         revised = updater.update(qDef, UPDATE_VERSION);
         launchContextExt = revised.extension;
       });
-      it('should have updated URLs for calculatedExpression', () => {
-        assert.strictEqual(launchContextExt[2].url, NEW_LAUNCH_CONTEXT);
+
+      it('should have updated URLs for launchContext', () => {
+        assert.strictEqual(launchContextExt[0].url, NEW_LAUNCH_CONTEXT);
       });
+
       it('should have the LForms version updated', () => {
         assert.strictEqual(util.versionFromTag(revised.meta.tag[0]), UPDATE_VERSION);
       });
