@@ -2,11 +2,15 @@
 
 This project follows [Semantic Versioning](http://semver.org/).
 
+## [29.0.1] 2021-05-17
+### Fixed
+- Corrected the version of the lforms peer-dependency.
+
 ## [29.0.0] 2021-01-05
 ### Changed
 - Breaking change to FHIR support. The launchContext URI has changed to
   http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext
-  
+
 ## [28.0.0] 2020-12-11
 ### Changed
 - Updates FHIR Questionnaire definitions to use the observationExtract
