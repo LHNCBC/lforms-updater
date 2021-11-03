@@ -2,6 +2,11 @@
 
 This project follows [Semantic Versioning](http://semver.org/).
 
+## [29.0.2] 2021-11-03
+### Fixed
+- Removed the dynamicly generated require statements, which caused issues with
+  parceljs.
+
 ## [29.0.1] 2021-05-17
 ### Fixed
 - Corrected the version of the lforms peer-dependency.
