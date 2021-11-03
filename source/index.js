@@ -9,6 +9,10 @@
  */
 const updateVersions_ = require('./versionList');
 
+/**
+ *  A hash from an updateVersions_ entry to a function for performing that
+ *  update step.  Each function takes the JSON for the resource to be updated.
+ */
 const updateFns_ = require('./updateFns');
 
 /**
