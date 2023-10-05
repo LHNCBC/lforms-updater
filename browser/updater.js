@@ -1,2 +1,472 @@
-window.lformsUpdater=function(t){var r={};function e(n){if(r[n])return r[n].exports;var o=r[n]={i:n,l:!1,exports:{}};return t[n].call(o.exports,o,o.exports,e),o.l=!0,o.exports}return e.m=t,e.c=r,e.d=function(t,r,n){e.o(t,r)||Object.defineProperty(t,r,{enumerable:!0,get:n})},e.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},e.t=function(t,r){if(1&r&&(t=e(t)),8&r)return t;if(4&r&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(e.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&r&&"string"!=typeof t)for(var o in t)e.d(n,o,function(r){return t[r]}.bind(null,o));return n},e.n=function(t){var r=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(r,"a",r),r},e.o=function(t,r){return Object.prototype.hasOwnProperty.call(t,r)},e.p="",e(e.s=1)}([function(t,r,e){"use strict";function n(t){if("undefined"==typeof Symbol||null==t[Symbol.iterator]){if(Array.isArray(t)||(t=function(t,r){if(!t)return;if("string"==typeof t)return o(t,r);var e=Object.prototype.toString.call(t).slice(8,-1);"Object"===e&&t.constructor&&(e=t.constructor.name);if("Map"===e||"Set"===e)return Array.from(e);if("Arguments"===e||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e))return o(t,r)}(t))){var r=0,e=function(){};return{s:e,n:function(){return r>=t.length?{done:!0}:{done:!1,value:t[r++]}},e:function(t){throw t},f:e}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var n,i,a=!0,u=!1;return{s:function(){n=t[Symbol.iterator]()},n:function(){var t=n.next();return a=t.done,t},e:function(t){u=!0,i=t},f:function(){try{a||null==n.return||n.return()}finally{if(u)throw i}}}}function o(t,r){(null==r||r>t.length)&&(r=t.length);for(var e=0,n=new Array(r);e<r;e++)n[e]=t[e];return n}var i=/^lformsVersion: (.+)$/;t.exports={isFHIRResource:function(t){return!!t.resourceType},findExtensions:function(t,r){t.extension&&r(t.extension);var e=t.item||t.items;if(e){var o,i=n(e);try{for(i.s();!(o=i.n()).done;){var a=o.value;this.findExtensions(a,r)}}catch(t){i.e(t)}finally{i.f()}}},findItemByExtension:function(t,r){t.extension&&r(t);var e=t.item||t.items;if(e){var o,i=n(e);try{for(i.s();!(o=i.n()).done;){var a=o.value;this.findItemByExtension(a,r)}}catch(t){i.e(t)}finally{i.f()}}},versionLessThan:function(t,r){var e;if(t){for(var n=t.split("."),o=r.split("."),i=0;i<3&&void 0===e;++i){var a=parseInt(n[i]),u=parseInt(o[i]);a!=u&&(e=a<u)}void 0===e&&(e=!1)}else e=!0;return e},makeVersionTag:function(t){return"lformsVersion: "+t},versionFromTag:function(t){var r=null,e=(t.code||t.display).match(i);return e&&(r=e[1]),r},hasLformsTag:function(t){if(t.meta&&t.meta.tag){var r,e=n(t.meta.tag);try{for(e.s();!(r=e.n()).done;){var o=r.value;if(o.code&&o.code.match(i))return!0}}catch(t){e.e(t)}finally{e.f()}}return!1}}},function(t,r,e){t.exports=e(2)},function(t,r,e){"use strict";function n(t){if("undefined"==typeof Symbol||null==t[Symbol.iterator]){if(Array.isArray(t)||(t=function(t,r){if(!t)return;if("string"==typeof t)return o(t,r);var e=Object.prototype.toString.call(t).slice(8,-1);"Object"===e&&t.constructor&&(e=t.constructor.name);if("Map"===e||"Set"===e)return Array.from(e);if("Arguments"===e||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e))return o(t,r)}(t))){var r=0,e=function(){};return{s:e,n:function(){return r>=t.length?{done:!0}:{done:!1,value:t[r++]}},e:function(t){throw t},f:e}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var n,i,a=!0,u=!1;return{s:function(){n=t[Symbol.iterator]()},n:function(){var t=n.next();return a=t.done,t},e:function(t){u=!0,i=t},f:function(){try{a||null==n.return||n.return()}finally{if(u)throw i}}}}function o(t,r){(null==r||r>t.length)&&(r=t.length);for(var e=0,n=new Array(r);e<r;e++)n[e]=t[e];return n}var i=e(3),a=e(4);t.exports={update:function(t,r){var o,u=r,f=e(0),s=f.isFHIRResource(t);if(s){var l=t.meta;if(l){var c=l.tag;if(c){var y,d=n(c);try{for(d.s();!(y=d.n()).done;){var m=y.value,p=f.versionFromTag(m);if(p){o=p;break}}}catch(t){d.e(t)}finally{d.f()}}}}else o=t.lformsVersion;for(var v,h=[],b=0,g=i.length;b<g&&(v=i[b])&&f.versionLessThan(o,v);++b)u&&f.versionLessThan(u,v)||h.push(v);var S,I=h[0],x=n(h.reverse());try{for(x.s();!(S=x.n()).done;){var A=S.value;t=a[A](t)}}catch(t){x.e(t)}finally{x.f()}if(h.length)if(s){var w=t.meta;w||(w=t.meta={});var j,C=w.tag;C||(C=w.tag=[]);var T,O=n(C);try{for(O.s();!(T=O.n()).done;){var k=T.value;if(f.versionFromTag(k)){j=k;break}}}catch(t){O.e(t)}finally{O.f()}var E=f.makeVersionTag(I);j?(j.code=E,delete j.display):C.push({code:E})}else t.lformsVersion=I;return t}}},function(t){t.exports=JSON.parse('["29.0.0","28.0.0","26.0.0","25.0.0","24.0.0","23.0.0","22.0.0"]')},function(t,r,e){t.exports={},t.exports["29.0.0"]=e(5),t.exports["28.0.0"]=e(6),t.exports["26.0.0"]=e(7),t.exports["25.0.0"]=e(8),t.exports["24.0.0"]=e(9),t.exports["23.0.0"]=e(10),t.exports["22.0.0"]=e(11)},function(t,r,e){"use strict";function n(t){if("undefined"==typeof Symbol||null==t[Symbol.iterator]){if(Array.isArray(t)||(t=function(t,r){if(!t)return;if("string"==typeof t)return o(t,r);var e=Object.prototype.toString.call(t).slice(8,-1);"Object"===e&&t.constructor&&(e=t.constructor.name);if("Map"===e||"Set"===e)return Array.from(e);if("Arguments"===e||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e))return o(t,r)}(t))){var r=0,e=function(){};return{s:e,n:function(){return r>=t.length?{done:!0}:{done:!1,value:t[r++]}},e:function(t){throw t},f:e}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var n,i,a=!0,u=!1;return{s:function(){n=t[Symbol.iterator]()},n:function(){var t=n.next();return a=t.done,t},e:function(t){u=!0,i=t},f:function(){try{a||null==n.return||n.return()}finally{if(u)throw i}}}}function o(t,r){(null==r||r>t.length)&&(r=t.length);for(var e=0,n=new Array(r);e<r;e++)n[e]=t[e];return n}t.exports=function(t){var r=e(0);return r.isFHIRResource(t)&&"Questionnaire"!==t.resourceType||r.findExtensions(t,(function(t){var r,e=n(t);try{for(e.s();!(r=e.n()).done;){var o=r.value;"http://hl7.org/fhir/StructureDefinition/questionnaire-launchContext"===o.url&&(o.url="http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext")}}catch(t){e.e(t)}finally{e.f()}})),t}},function(t,r,e){"use strict";function n(t){if("undefined"==typeof Symbol||null==t[Symbol.iterator]){if(Array.isArray(t)||(t=function(t,r){if(!t)return;if("string"==typeof t)return o(t,r);var e=Object.prototype.toString.call(t).slice(8,-1);"Object"===e&&t.constructor&&(e=t.constructor.name);if("Map"===e||"Set"===e)return Array.from(e);if("Arguments"===e||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e))return o(t,r)}(t))){var r=0,e=function(){};return{s:e,n:function(){return r>=t.length?{done:!0}:{done:!1,value:t[r++]}},e:function(t){throw t},f:e}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var n,i,a=!0,u=!1;return{s:function(){n=t[Symbol.iterator]()},n:function(){var t=n.next();return a=t.done,t},e:function(t){u=!0,i=t},f:function(){try{a||null==n.return||n.return()}finally{if(u)throw i}}}}function o(t,r){(null==r||r>t.length)&&(r=t.length);for(var e=0,n=new Array(r);e<r;e++)n[e]=t[e];return n}t.exports=function(t){var r=e(0);return(!r.isFHIRResource(t)||"Questionnaire"===t.resourceType&&r.hasLformsTag(t))&&r.findExtensions(t,(function(t){var r,e=n(t);try{for(e.s();!(r=e.n()).done;){if("http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod"===r.value.url){t.push({url:"http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract",valueBoolean:!0});break}}}catch(t){e.e(t)}finally{e.f()}})),t}},function(t,r,e){"use strict";function n(t){return(n="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}t.exports=function(t){return e(0).isFHIRResource(t)||("object"===n(t.templateOptions)?(void 0===t.templateOptions.hideFormControls&&(t.templateOptions.hideFormControls=!1),void 0===t.templateOptions.showFormHeader&&(t.templateOptions.showFormHeader=!0)):t.templateOptions={hideFormControls:!1,showFormHeader:!0}),t}},function(t,r,e){"use strict";function n(t){if("undefined"==typeof Symbol||null==t[Symbol.iterator]){if(Array.isArray(t)||(t=function(t,r){if(!t)return;if("string"==typeof t)return o(t,r);var e=Object.prototype.toString.call(t).slice(8,-1);"Object"===e&&t.constructor&&(e=t.constructor.name);if("Map"===e||"Set"===e)return Array.from(e);if("Arguments"===e||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e))return o(t,r)}(t))){var r=0,e=function(){};return{s:e,n:function(){return r>=t.length?{done:!0}:{done:!1,value:t[r++]}},e:function(t){throw t},f:e}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var n,i,a=!0,u=!1;return{s:function(){n=t[Symbol.iterator]()},n:function(){var t=n.next();return a=t.done,t},e:function(t){u=!0,i=t},f:function(){try{a||null==n.return||n.return()}finally{if(u)throw i}}}}function o(t,r){(null==r||r>t.length)&&(r=t.length);for(var e=0,n=new Array(r);e<r;e++)n[e]=t[e];return n}t.exports=function(t){var r=e(0);return r.isFHIRResource(t)&&"Questionnaire"!==t.resourceType||r.findExtensions(t,(function(t){var r,e=n(t);try{for(e.s();!(r=e.n()).done;){var o=r.value;"http://hl7.org/fhir/StructureDefinition/questionnaire-calculatedExpression"===o.url&&(o.url="http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-calculatedExpression")}}catch(t){e.e(t)}finally{e.f()}})),t}},function(t,r,e){"use strict";function n(t){!function t(r,e,n){for(var o=r.length,i=null,a=0;a<o;a++){var u=r[a];u.questionCardinality&&u.questionCardinality.max&&("*"===u.questionCardinality.max||parseInt(u.questionCardinality.max)>1)&&i&&i.questionCode===u.questionCode?1:1;var f=e+"/"+u.questionCode;u._parentItem=n,u._codePath=f,u.linkId||(u.linkId=f),i=u,u.items&&u.items.length>0&&t(u.items,f,u)}}(t.items,"",t),function t(r){for(var e=0,n=r.length;e<n;e++){var i=r[e];if(i.skipLogic&&i.skipLogic.conditions)for(var a=0,u=i.skipLogic.conditions.length;a<u;a++){var f=i.skipLogic.conditions[a],s=o(i,f.source);f.source=s.linkId}if(i.dataControl)for(a=0,u=i.dataControl.length;a<u;a++){var l=i.dataControl[a].source;if(l&&(!l.sourceType||"INTERNAL"===l.sourceType)&&l.sourceItemCode){if(!(s=o(i,l.sourceItemCode)))throw new Error("Data control for item '"+i.question+"' refers to source item '"+l.sourceItemCode+"' which was not found as a sibling, ancestor, or ancestor sibling.");l.sourceLinkId=s.linkId,delete l.sourceItemCode}}if(i.calculationMethod&&i.calculationMethod.value&&Array.isArray(i.calculationMethod.value)){var c=[];for(a=0,u=i.calculationMethod.value.length;a<u;a++){var y=i.calculationMethod.value[a];s=o(i,y);c.push(s.linkId)}i.calculationMethod.value=c}i.items&&i.items.length>0&&t(i.items)}}(t.items),function t(r){for(var e=0,n=r.length;e<n;e++){var o=r[e];delete o._parentItem,delete o._codePath,o.items&&o.items.length>0&&t(o.items)}}(t.items)}function o(t,r){var e=null;if(t._parentItem&&Array.isArray(t._parentItem.items))for(var n=0,o=t._parentItem.items.length;n<o;n++)if(t._parentItem.items[n].questionCode===r){e=t._parentItem.items[n];break}if(!e)for(var i=t._parentItem;i;){var a=!1;if(i.questionCode===r)e=i,a=!0;else if(i._parentItem&&Array.isArray(i._parentItem.items)){var u=i._parentItem.items;for(n=0,o=u.length;n<o;n++)if(u[n].questionCode===r){e=u[n],a=!0;break}}if(a)break;i=i._parentItem}return e}t.exports=function(t){return!e(0).isFHIRResource(t)&&t.items&&n(t),t}},function(t,r,e){"use strict";function n(t){if("undefined"==typeof Symbol||null==t[Symbol.iterator]){if(Array.isArray(t)||(t=function(t,r){if(!t)return;if("string"==typeof t)return o(t,r);var e=Object.prototype.toString.call(t).slice(8,-1);"Object"===e&&t.constructor&&(e=t.constructor.name);if("Map"===e||"Set"===e)return Array.from(e);if("Arguments"===e||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e))return o(t,r)}(t))){var r=0,e=function(){};return{s:e,n:function(){return r>=t.length?{done:!0}:{done:!1,value:t[r++]}},e:function(t){throw t},f:e}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var n,i,a=!0,u=!1;return{s:function(){n=t[Symbol.iterator]()},n:function(){var t=n.next();return a=t.done,t},e:function(t){u=!0,i=t},f:function(){try{a||null==n.return||n.return()}finally{if(u)throw i}}}}function o(t,r){(null==r||r>t.length)&&(r=t.length);for(var e=0,n=new Array(r);e<r;e++)n[e]=t[e];return n}t.exports=function(t){var r=e(0),o=t.meta;if(o){var i=o.tag;if(i){var a,u=n(i);try{for(u.s();!(a=u.n()).done;){var f=a.value;if(r.versionFromTag(f)){f.display&&!f.code&&(f.code=f.display,delete f.display);break}}}catch(t){u.e(t)}finally{u.f()}}}return"Questionnaire"===t.resourceType&&r.findItemByExtension(t,(function(t){if(t.extension)for(var r=0;r<t.extension.length;r++){"http://hl7.org/fhir/StructureDefinition/questionnaire-answerRepeats"===t.extension[r].url&&(t.repeats=!0,t.extension.splice(r,1),r-=1)}})),t}},function(t,r,e){"use strict";function n(t){if("undefined"==typeof Symbol||null==t[Symbol.iterator]){if(Array.isArray(t)||(t=function(t,r){if(!t)return;if("string"==typeof t)return o(t,r);var e=Object.prototype.toString.call(t).slice(8,-1);"Object"===e&&t.constructor&&(e=t.constructor.name);if("Map"===e||"Set"===e)return Array.from(e);if("Arguments"===e||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e))return o(t,r)}(t))){var r=0,e=function(){};return{s:e,n:function(){return r>=t.length?{done:!0}:{done:!1,value:t[r++]}},e:function(t){throw t},f:e}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var n,i,a=!0,u=!1;return{s:function(){n=t[Symbol.iterator]()},n:function(){var t=n.next();return a=t.done,t},e:function(t){u=!0,i=t},f:function(){try{a||null==n.return||n.return()}finally{if(u)throw i}}}}function o(t,r){(null==r||r>t.length)&&(r=t.length);for(var e=0,n=new Array(r);e<r;e++)n[e]=t[e];return n}t.exports=function(t){var r=e(0);return r.isFHIRResource(t)&&"Questionnaire"!==t.resourceType||r.findExtensions(t,(function(t){var r,e=n(t);try{for(e.s();!(r=e.n()).done;){var o=r.value;"http://hl7.org/fhir/StructureDefinition/questionnaire-observationLinkPeriod"===o.url&&(o.url="http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod")}}catch(t){e.e(t)}finally{e.f()}})),t}}]);
+"use strict";
+(() => {
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __commonJS = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  };
+
+  // source/versionList.json
+  var require_versionList = __commonJS({
+    "source/versionList.json"(exports, module) {
+      module.exports = ["29.0.0", "28.0.0", "26.0.0", "25.0.0", "24.0.0", "23.0.0", "22.0.0"];
+    }
+  });
+
+  // source/util.js
+  var require_util = __commonJS({
+    "source/util.js"(exports, module) {
+      "use strict";
+      var VERSION_REGEX = /^lformsVersion: (.+)$/;
+      module.exports = {
+        /**
+         *  Returns true if the given parsed JSON is a FHIR resource.
+         */
+        isFHIRResource: function(parsedJSON) {
+          return !!parsedJSON.resourceType;
+        },
+        /**
+         *  Finds extension arrays in the given structure, and calls the callback
+         *  for each array found, passing it as a parameter.
+         */
+        findExtensions: function(parsedJSON, callback) {
+          if (parsedJSON.extension)
+            callback(parsedJSON.extension);
+          let items = parsedJSON.item || parsedJSON.items;
+          if (items) {
+            for (let i of items)
+              this.findExtensions(i, callback);
+          }
+        },
+        /**
+         *  Finds the item by searching extension arrays in the given structure, and calls the callback
+         *  for each array found, passing the item as a parameter.
+         */
+        findItemByExtension: function(parsedJSON, callback) {
+          if (parsedJSON.extension)
+            callback(parsedJSON);
+          let items = parsedJSON.item || parsedJSON.items;
+          if (items) {
+            for (let i of items)
+              this.findItemByExtension(i, callback);
+          }
+        },
+        /**
+         *  Returns true if the first version is less than the second version.
+         *  Assumption: There are always three numeric parts in the version strings,
+         *  separated by periods.
+         * @param left the first version (left of the < operator).  This can be
+         *  undefined or null; in that case the return value is true.
+         * @param right the second version (right of the < operator)
+         */
+        versionLessThan: function(left, right) {
+          let rtn;
+          if (!left)
+            rtn = true;
+          else {
+            let leftParts = left.split(".");
+            let rightParts = right.split(".");
+            for (let i = 0; i < 3 && rtn === void 0; ++i) {
+              let lp = parseInt(leftParts[i]), rp = parseInt(rightParts[i]);
+              if (lp != rp)
+                rtn = lp < rp;
+            }
+            if (rtn === void 0)
+              rtn = false;
+          }
+          return rtn;
+        },
+        /**
+         *  Returns a FHIR tag display string for a given LForms version string.
+         * @param lformsVersion The LForms SemVer string for which a tag is needed.
+         */
+        makeVersionTag: function(lformsVersion) {
+          return "lformsVersion: " + lformsVersion;
+        },
+        /**
+         *  Returns the LForms SemVer version from the given FHIR tag object,
+         *  or null if the given tag string does not indicate an LForms version.
+         * @param tag A FHIR tag object
+         */
+        versionFromTag: function(tag) {
+          let rtn = null;
+          let versionStr = tag.code || tag.display;
+          let md = versionStr.match(VERSION_REGEX);
+          if (md)
+            rtn = md[1];
+          return rtn;
+        },
+        /**
+         *  Returns true if there is a LForms tag in the FHIR resource
+         * @param parsedJSON the updated resource
+         */
+        hasLformsTag(parsedJSON) {
+          if (parsedJSON.meta && parsedJSON.meta.tag) {
+            for (const tag of parsedJSON.meta.tag) {
+              if (tag.code && tag.code.match(VERSION_REGEX)) {
+                return true;
+              }
+            }
+          }
+          return false;
+        }
+      };
+    }
+  });
+
+  // source/versionUpdates/29.0.0.js
+  var require__ = __commonJS({
+    "source/versionUpdates/29.0.0.js"(exports, module) {
+      "use strict";
+      module.exports = function(parsedJSON) {
+        let util = require_util();
+        if (!util.isFHIRResource(parsedJSON) || parsedJSON.resourceType === "Questionnaire") {
+          util.findExtensions(parsedJSON, function(extArray) {
+            for (let ext of extArray) {
+              if (ext.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-launchContext") {
+                ext.url = "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext";
+              }
+            }
+          });
+        }
+        return parsedJSON;
+      };
+    }
+  });
+
+  // source/versionUpdates/28.0.0.js
+  var require__2 = __commonJS({
+    "source/versionUpdates/28.0.0.js"(exports, module) {
+      "use strict";
+      module.exports = function(parsedJSON) {
+        let util = require_util();
+        if (!util.isFHIRResource(parsedJSON) || parsedJSON.resourceType === "Questionnaire" && util.hasLformsTag(parsedJSON)) {
+          util.findExtensions(parsedJSON, function(extArray) {
+            for (const ext of extArray) {
+              if (ext.url === "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod") {
+                extArray.push({
+                  url: "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract",
+                  valueBoolean: true
+                });
+                break;
+              }
+            }
+          });
+        }
+        return parsedJSON;
+      };
+    }
+  });
+
+  // source/versionUpdates/26.0.0.js
+  var require__3 = __commonJS({
+    "source/versionUpdates/26.0.0.js"(exports, module) {
+      "use strict";
+      module.exports = function(parsedJSON) {
+        let util = require_util();
+        if (!util.isFHIRResource(parsedJSON)) {
+          if (typeof parsedJSON.templateOptions === "object") {
+            if (parsedJSON.templateOptions.hideFormControls === void 0) {
+              parsedJSON.templateOptions.hideFormControls = false;
+            }
+            if (parsedJSON.templateOptions.showFormHeader === void 0) {
+              parsedJSON.templateOptions.showFormHeader = true;
+            }
+          } else {
+            parsedJSON.templateOptions = {
+              hideFormControls: false,
+              showFormHeader: true
+            };
+          }
+        }
+        return parsedJSON;
+      };
+    }
+  });
+
+  // source/versionUpdates/25.0.0.js
+  var require__4 = __commonJS({
+    "source/versionUpdates/25.0.0.js"(exports, module) {
+      "use strict";
+      module.exports = function(parsedJSON) {
+        let util = require_util();
+        if (!util.isFHIRResource(parsedJSON) || parsedJSON.resourceType === "Questionnaire") {
+          util.findExtensions(parsedJSON, function(extArray) {
+            for (let ext of extArray) {
+              if (ext.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-calculatedExpression")
+                ext.url = "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-calculatedExpression";
+            }
+          });
+        }
+        return parsedJSON;
+      };
+    }
+  });
+
+  // source/versionUpdates/24.0.0.js
+  var require__5 = __commonJS({
+    "source/versionUpdates/24.0.0.js"(exports, module) {
+      "use strict";
+      var PATH_DELIMITER = "/";
+      function convertCodeToLinkId(lfData) {
+        _addLinkId(lfData.items, "", lfData);
+        _convertFormControls(lfData.items);
+        _removeTempFields(lfData.items);
+      }
+      function _removeTempFields(items) {
+        for (var i = 0, iLen = items.length; i < iLen; i++) {
+          var item = items[i];
+          delete item._parentItem;
+          delete item._codePath;
+          if (item.items && item.items.length > 0) {
+            _removeTempFields(item.items);
+          }
+        }
+      }
+      function _addLinkId(items, parentItemCodePath, parentItem) {
+        var iLen = items.length, prevSibling = null, itemId = 1;
+        for (var i = 0; i < iLen; i++) {
+          var item = items[i];
+          var questionRepeatable = item.questionCardinality && item.questionCardinality.max && (item.questionCardinality.max === "*" || parseInt(item.questionCardinality.max) > 1);
+          if (questionRepeatable && prevSibling && prevSibling.questionCode === item.questionCode) {
+            itemId += 1;
+          } else {
+            itemId = 1;
+          }
+          var codePath = parentItemCodePath + PATH_DELIMITER + item.questionCode;
+          item._parentItem = parentItem;
+          item._codePath = codePath;
+          if (!item.linkId) {
+            item.linkId = codePath;
+          }
+          prevSibling = item;
+          if (item.items && item.items.length > 0) {
+            _addLinkId(item.items, codePath, item);
+          }
+        }
+      }
+      function _convertFormControls(items) {
+        for (var i = 0, iLen = items.length; i < iLen; i++) {
+          var item = items[i];
+          if (item.skipLogic && item.skipLogic.conditions) {
+            for (var j = 0, jLen = item.skipLogic.conditions.length; j < jLen; j++) {
+              var condition = item.skipLogic.conditions[j];
+              var sourceItem = _findItemsUpwardsAlongAncestorTree(item, condition.source);
+              condition.source = sourceItem.linkId;
+            }
+          }
+          if (item.dataControl) {
+            for (var j = 0, jLen = item.dataControl.length; j < jLen; j++) {
+              var source = item.dataControl[j].source;
+              if (source && (!source.sourceType || source.sourceType === "INTERNAL") && source.sourceItemCode) {
+                var sourceItem = _findItemsUpwardsAlongAncestorTree(item, source.sourceItemCode);
+                if (!sourceItem) {
+                  throw new Error("Data control for item '" + item.question + "' refers to source item '" + source.sourceItemCode + "' which was not found as a sibling, ancestor, or ancestor sibling.");
+                }
+                source.sourceLinkId = sourceItem.linkId;
+                delete source.sourceItemCode;
+              }
+            }
+          }
+          if (item.calculationMethod && item.calculationMethod.value && Array.isArray(item.calculationMethod.value)) {
+            var newValue = [];
+            for (var j = 0, jLen = item.calculationMethod.value.length; j < jLen; j++) {
+              var questionCode = item.calculationMethod.value[j];
+              var sourceItem = _findItemsUpwardsAlongAncestorTree(item, questionCode);
+              newValue.push(sourceItem.linkId);
+            }
+            item.calculationMethod.value = newValue;
+          }
+          if (item.items && item.items.length > 0) {
+            _convertFormControls(item.items);
+          }
+        }
+      }
+      function _findItemsUpwardsAlongAncestorTree(item, questionCode) {
+        var sourceItem = null;
+        if (item._parentItem && Array.isArray(item._parentItem.items)) {
+          for (var i = 0, iLen = item._parentItem.items.length; i < iLen; i++) {
+            if (item._parentItem.items[i].questionCode === questionCode) {
+              sourceItem = item._parentItem.items[i];
+              break;
+            }
+          }
+        }
+        if (!sourceItem) {
+          var parentItem = item._parentItem;
+          while (parentItem) {
+            var foundSource = false;
+            if (parentItem.questionCode === questionCode) {
+              sourceItem = parentItem;
+              foundSource = true;
+            } else if (parentItem._parentItem && Array.isArray(parentItem._parentItem.items)) {
+              var parentSiblings = parentItem._parentItem.items;
+              for (var i = 0, iLen = parentSiblings.length; i < iLen; i++) {
+                if (parentSiblings[i].questionCode === questionCode) {
+                  sourceItem = parentSiblings[i];
+                  foundSource = true;
+                  break;
+                }
+              }
+            }
+            if (foundSource)
+              break;
+            parentItem = parentItem._parentItem;
+          }
+        }
+        return sourceItem;
+      }
+      module.exports = function(parsedJSON) {
+        let util = require_util();
+        if (!util.isFHIRResource(parsedJSON) && parsedJSON.items) {
+          convertCodeToLinkId(parsedJSON);
+        }
+        return parsedJSON;
+      };
+    }
+  });
+
+  // source/versionUpdates/23.0.0.js
+  var require__6 = __commonJS({
+    "source/versionUpdates/23.0.0.js"(exports, module) {
+      "use strict";
+      module.exports = function(parsedJSON) {
+        let util = require_util();
+        let meta = parsedJSON.meta;
+        if (meta) {
+          let tags = meta.tag;
+          if (tags) {
+            for (let t of tags) {
+              let version = util.versionFromTag(t);
+              if (version) {
+                if (t.display && !t.code) {
+                  t.code = t.display;
+                  delete t.display;
+                }
+                break;
+              }
+            }
+          }
+        }
+        if (parsedJSON.resourceType === "Questionnaire") {
+          util.findItemByExtension(parsedJSON, function(item) {
+            if (item.extension) {
+              for (let i = 0; i < item.extension.length; i++) {
+                let ext = item.extension[i];
+                if (ext.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-answerRepeats") {
+                  item.repeats = true;
+                  item.extension.splice(i, 1);
+                  i = i - 1;
+                }
+              }
+            }
+          });
+        }
+        return parsedJSON;
+      };
+    }
+  });
+
+  // source/versionUpdates/22.0.0.js
+  var require__7 = __commonJS({
+    "source/versionUpdates/22.0.0.js"(exports, module) {
+      "use strict";
+      module.exports = function(parsedJSON) {
+        let util = require_util();
+        if (!util.isFHIRResource(parsedJSON) || parsedJSON.resourceType === "Questionnaire") {
+          util.findExtensions(parsedJSON, function(extArray) {
+            for (let ext of extArray) {
+              if (ext.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-observationLinkPeriod")
+                ext.url = "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod";
+            }
+          });
+        }
+        return parsedJSON;
+      };
+    }
+  });
+
+  // source/updateFns.js
+  var require_updateFns = __commonJS({
+    "source/updateFns.js"(exports, module) {
+      module.exports = {};
+      module.exports["29.0.0"] = require__();
+      module.exports["28.0.0"] = require__2();
+      module.exports["26.0.0"] = require__3();
+      module.exports["25.0.0"] = require__4();
+      module.exports["24.0.0"] = require__5();
+      module.exports["23.0.0"] = require__6();
+      module.exports["22.0.0"] = require__7();
+    }
+  });
+
+  // source/index.js
+  var require_source = __commonJS({
+    "source/index.js"(exports, module) {
+      "use strict";
+      var updateVersions_ = require_versionList();
+      var updateFns_ = require_updateFns();
+      module.exports = { update: function(parsedJSON, version) {
+        let stopVersion = version;
+        let util = require_util();
+        var isFHIR = util.isFHIRResource(parsedJSON);
+        var lformsVersion;
+        if (isFHIR) {
+          let meta = parsedJSON.meta;
+          if (meta) {
+            let tags = meta.tag;
+            if (tags) {
+              for (let t of tags) {
+                let tagVersion = util.versionFromTag(t);
+                if (tagVersion) {
+                  lformsVersion = tagVersion;
+                  break;
+                }
+              }
+            }
+          }
+        } else {
+          lformsVersion = parsedJSON.lformsVersion;
+        }
+        let updateSteps = [];
+        for (let i = 0, len = updateVersions_.length, uv; i < len && (uv = updateVersions_[i]) && util.versionLessThan(lformsVersion, uv); ++i) {
+          if (!stopVersion || !util.versionLessThan(stopVersion, uv))
+            updateSteps.push(uv);
+        }
+        let latestVersion = updateSteps[0];
+        for (let step of updateSteps.reverse())
+          parsedJSON = updateFns_[step](parsedJSON);
+        if (updateSteps.length) {
+          if (isFHIR) {
+            let meta = parsedJSON.meta;
+            if (!meta)
+              meta = parsedJSON.meta = {};
+            let tags = meta.tag;
+            if (!tags)
+              tags = meta.tag = [];
+            let versionTag;
+            for (let t of tags) {
+              let version2 = util.versionFromTag(t);
+              if (version2) {
+                versionTag = t;
+                break;
+              }
+            }
+            let versionDisplay = util.makeVersionTag(latestVersion);
+            if (versionTag) {
+              versionTag.code = versionDisplay;
+              delete versionTag.display;
+            } else
+              tags.push({ code: versionDisplay });
+          } else
+            parsedJSON.lformsVersion = latestVersion;
+        }
+        return parsedJSON;
+      } };
+    }
+  });
+
+  // source/index_browser.js
+  var updater = require_source();
+  window.lformsUpdater = updater;
+})();
 //# sourceMappingURL=updater.js.map
