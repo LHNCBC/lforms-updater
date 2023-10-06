@@ -5,7 +5,8 @@
   "main": "source/index.js",
   "bin": "./bin/updater.js",
   "scripts": {
-    "build": "node buildVersionList.js && esbuild --bundle --outfile=browser/updater.js --sourcemap source/index_browser.js --target=es2017",
+    "build": "node buildVersionList.js && npm run build:js",
+    "build:js": "esbuild --bundle --minify --outfile=browser/updater.js --sourcemap source/index_browser.js --target=es2017",
     "test": "mocha test/*spec.js test/*/*spec.js"
   },
   "repository": {
