@@ -2,6 +2,14 @@
 
 This project follows [Semantic Versioning](http://semver.org/).
 
+## [30.0.0]
+### Changed
+- Removed lforms as a peer dependency.  lforms is not actually needed by this
+  package (so far, anyway).  The presence as a peer depenendency was causing
+  applications using lforms-updater to also install the version of lforms listed
+  in the peer dependencies section, which was an old version using AngularJS
+  that has numerous npm audit warnings.
+
 ## [29.0.2] 2021-11-03
 ### Fixed
 - Removed the dynamicly generated require statements, which caused issues with
