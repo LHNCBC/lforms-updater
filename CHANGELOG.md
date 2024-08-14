@@ -2,6 +2,11 @@
 
 This project follows [Semantic Versioning](http://semver.org/).
 
+## [30.0.1]
+### Changed
+- Generate unique link ids for the items that are at the same
+  level and have the same questionCode.
+
 ## [30.0.0]
 ### Changed
 - Removed lforms as a peer dependency.  lforms is not actually needed by this

@@ -593,6 +593,15 @@
           "8302-2"
         ]
       }
+    },
+    {
+      "questionCode": "dup-code-001",
+      "question": "First asked, dup-code-001",
+      "dataType": "ST"
+    },
+    {
+      "questionCode": "dup-code-001",
+      "question": "Second asked, dup-code-001",
+      "dataType": "ST"
     }
-
   ]}

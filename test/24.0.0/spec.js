@@ -27,6 +27,17 @@ describe(UPDATE_VERSION, function() {
       })
     });
 
+    it('should have unique linkIds for items with the same questionCode', () => {
+      updatedAllInOneDef = updater.update(allInOneDef, UPDATE_VERSION);
+      uniqQuestionCodes = new Set(), uniqLinkIds = new Set();
+      updatedAllInOneDef.items.forEach(item => {
+        uniqQuestionCodes.add(item.questionCode);
+        uniqLinkIds.add(item.linkId);
+      });
+      assert.equal(uniqLinkIds.size, updatedAllInOneDef.items.length);
+      assert(uniqLinkIds.size > uniqQuestionCodes.size);
+    });
+
     it('should convert skip logic to use linkId', () => {
       assert.equal(allInOneDef.items[36].linkId, undefined);
       assert.equal(allInOneDef.items[36].skipLogic.conditions[0].source, "slALLSource1");

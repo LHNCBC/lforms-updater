@@ -8,7 +8,7 @@ const PATH_DELIMITER = "/";
  * @param lfData a LForms form definition data object
  */
 function convertCodeToLinkId(lfData) {
-  _addLinkId(lfData.items, '', lfData);
+  _addLinkIdForDescendents(lfData);
   _convertFormControls(lfData.items);
   _removeTempFields(lfData.items)
 }
@@ -23,7 +23,6 @@ function _removeTempFields(items) {
   for (var i = 0, iLen = items.length; i < iLen; i++) {
     var item = items[i];
     delete item._parentItem;
-    delete item._codePath;
     // process the sub items
     if (item.items && item.items.length > 0) {
       _removeTempFields(item.items);
@@ -32,46 +31,40 @@ function _removeTempFields(items) {
 }
 
 /**
- * Generate linkId from questionCode
- * @param items a list of LForms items
- * @param parentItemCodePath the codePath of the parent item
+ * Add linkIds for the given item's descendent items. Link ids are generated based on the questionCode.
+ * When multiple items at the same level have the same question code, the link ids for the subsequent
+ * occurrences of that question code will have a suffix that is .<sequence#>.
  * @param parentItem the parent item
  * @private
  */
-function _addLinkId(items, parentItemCodePath, parentItem) {
+function _addLinkIdForDescendents(parentItem) {
 
-  var iLen = items.length, prevSibling = null, itemId = 1;
+  if (! parentItem.items || ! parentItem.items.length) return;
+
+  let qCodeCount = {}; // map from questionCode to the number of occurrences of the code seen so far.
+  let iLen = parentItem.items.length;
 
   // for each item on this level
   for (var i = 0; i < iLen; i++) {
-    var item = items[i];
-
-    var questionRepeatable = item.questionCardinality && item.questionCardinality.max &&
-        (item.questionCardinality.max === "*" || parseInt(item.questionCardinality.max) > 1);
-
-    // id
-    if (questionRepeatable && prevSibling && prevSibling.questionCode === item.questionCode) {
-      itemId += 1;
-    } else {
-      itemId = 1;
-    }
-
-    // codePath as linkId
-    var codePath = parentItemCodePath + PATH_DELIMITER + item.questionCode;
-
+    let item = parentItem.items[i];
     item._parentItem = parentItem;
-    item._codePath = codePath;
+    qCodeCount[item.questionCode] = (qCodeCount[item.questionCode] || 0) + 1;
+
+    // A previous version of code attempted to establish repeating sequences but didn't get there.
+    // Keeping these lines (as reference) just in case we want to do it in the future.
+    // var questionRepeatable = item.questionCardinality && item.questionCardinality.max &&
+    //  (item.questionCardinality.max === "*" || parseInt(item.questionCardinality.max) > 1);
+    //if (questionRepeatable && prevSibling && prevSibling.questionCode === item.questionCode)
 
     // linkId for Questionnaire
     if (!item.linkId) {
-      item.linkId = codePath;
+      let dotSeqNum = qCodeCount[item.questionCode] > 1? '.' + qCodeCount[item.questionCode]: '';
+      item.linkId = (parentItem.linkId || '') + PATH_DELIMITER + item.questionCode + dotSeqNum;
     }
-    // keep a reference to the previous item for checking repeating items.
-    prevSibling = item;
 
     // process the sub items
     if (item.items && item.items.length > 0) {
-      _addLinkId(item.items, codePath, item);
+      _addLinkIdForDescendents(item);
     }
   }
 }
