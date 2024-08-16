@@ -5,7 +5,7 @@ This project follows [Semantic Versioning](http://semver.org/).
 ## [30.0.1]
 ### Changed
 - Generate unique link ids for the items that are at the same
-  level and have the same questionCode.
+  level and have the same questionCode. This is done in the version 24.0.0 update.
 
 ## [30.0.0]
 ### Changed
