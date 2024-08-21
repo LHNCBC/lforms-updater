@@ -602,6 +602,13 @@
     {
       "questionCode": "dup-code-001",
       "question": "Second asked, dup-code-001",
-      "dataType": "ST"
+      "dataType": "ST",
+      "items": [
+        {
+          "questionCode": "nest-code-001",
+          "question": "Second asked, dup-code-001",
+          "dataType": "ST"
+        }
+      ]
     }
   ]}

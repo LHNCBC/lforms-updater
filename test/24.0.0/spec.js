@@ -38,6 +38,12 @@ describe(UPDATE_VERSION, function() {
       assert(uniqLinkIds.size > uniqQuestionCodes.size);
     });
 
+    it('should have the correct linkId', () => {
+      updatedAllInOneDef = updater.update(allInOneDef, UPDATE_VERSION);
+      let nestedItem = updatedAllInOneDef.items.filter(item => item.questionCode === 'dup-code-001' && item.items)[0];
+      assert.equal(nestedItem.items[0].linkId, '/dup-code-001.2/nest-code-001');
+    });
+
     it('should convert skip logic to use linkId', () => {
       assert.equal(allInOneDef.items[36].linkId, undefined);
       assert.equal(allInOneDef.items[36].skipLogic.conditions[0].source, "slALLSource1");
